@@ -51,6 +51,14 @@ def third():
     pass
 
 
+def fourth():
+    first = titles.sort_values(by="imdb_score", ascending=True).dropna().head(1000)  # ascending - по збільшенню
+    second = credits[["id", "name", "role"]][credits["role"] == "ACTOR"]
+    merged = pd.merge(first, second, how='inner', on="id")
+    print(merged.groupby(by="name")["id"].count().sort_values(ascending=False).head(10))
+
+
 first()
 second()
+fourth()
 # first1()
